@@ -1,4 +1,4 @@
-const puppeteer = require("puppeteer");
+import puppeteer from "puppeteer";
 
 // Sample data
 const data = [

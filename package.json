@@ -1,0 +1,25 @@
+{
+  "name": "webcrawler",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dpmanek/webCrawler.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dpmanek/webCrawler/issues"
+  },
+  "homepage": "https://github.com/dpmanek/webCrawler#readme",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "puppeteer": "^24.2.0"
+  }
+}

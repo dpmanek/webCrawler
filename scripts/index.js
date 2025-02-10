@@ -1,1 +1,1 @@
-export * from "./testScript1.js";
+export * from "./ScrapeBidData.js";

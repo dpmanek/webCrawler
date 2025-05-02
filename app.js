@@ -13,10 +13,11 @@
 // await scrapeTexasCity();
 
 import dotenv from 'dotenv';
-import { scrapeAlvinTexas } from './scripts/SpecificWebsiteScripts/AlvinTexas.js';
+// import { scrapeAlvinTexas } from './scripts/SpecificWebsiteScripts/AlvinTexas.js';
+import { scrapeLeagueCityTexas } from './scripts/SpecificWebsiteScripts/LeagueCity.js';
 
 // Load environment variables
 dotenv.config();
 
 // Run only the Alvin Texas scraper
-await scrapeAlvinTexas();
+await scrapeLeagueCityTexas();

@@ -1,6 +1,7 @@
 import { scrapeSanAntonio } from './SpecificWebsiteScripts/SanAntonio.js';
 import { scrapeTexasCity } from './SpecificWebsiteScripts/TexasCity.js';
 import { scrapeAlvinTexas } from './SpecificWebsiteScripts/AlvinTexas.js';
+import { scrapeLeagueCityTexas } from './SpecificWebsiteScripts/LeagueCity.js';
 
 export async function scrapeData2() {
 	console.log('🔍 Starting all scrapers...');
@@ -9,6 +10,7 @@ export async function scrapeData2() {
 		{ name: 'SanAntonio', scraper: scrapeSanAntonio },
 		{ name: 'TexasCity', scraper: scrapeTexasCity },
 		{ name: 'AlvinTexas', scraper: scrapeAlvinTexas },
+		{ name: 'LeagueCity', scraper: scrapeLeagueCityTexas },
 	];
 
 	for (const { name, scraper } of allScrapers) {

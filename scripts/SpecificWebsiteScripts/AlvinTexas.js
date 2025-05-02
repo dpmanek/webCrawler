@@ -11,7 +11,8 @@ export async function scrapeAlvinTexas() {
 
 	console.log('🕵️ Scraping bid list from Alvin, Texas...');
 	await page.goto(
-		`${BASE_URL}/Bids.aspx?CatID=showStatus&txtSort=Category&showAllBids=on&Status=open`,
+		`${BASE_URL}/Bids.aspx`,
+		// `${BASE_URL}/Bids.aspx?CatID=showStatus&txtSort=Category&showAllBids=on&Status=open`,
 		{
 			waitUntil: 'networkidle2',
 			timeout: 60000,

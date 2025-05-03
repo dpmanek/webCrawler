@@ -10,6 +10,8 @@ import { scrapeSanAntonio } from './scripts/SpecificWebsiteScripts/SanAntonio.js
 import { scrapeTomballISD } from './scripts/SpecificWebsiteScripts/TomballISD.js';
 import { scrapeLeagueCityTexas } from './scripts/SpecificWebsiteScripts/LeagueCity.js';
 import { scrapeAlvinTexas } from './scripts/SpecificWebsiteScripts/AlvinTexas.js';
+import { scrapePortArthurt } from './scripts/SpecificWebsiteScripts/PortArthur.js';
+import { scrapeSanMarcos } from './scripts/SpecificWebsiteScripts/SanMarcos.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -34,6 +36,12 @@ app.get('/api/crawlers', (req, res) => {
 			name: 'Alvin Texas',
 			filename: 'civcast_detailed_bids.csv',
 		},
+		{
+			id: 'port-arthur',
+			name: 'Port Arthur',
+			filename: 'port_arthur_bids.csv',
+		},
+		{ id: 'san-marcos', name: 'San Marcos', filename: 'san_marcos_bids.csv' },
 	];
 
 	res.json(crawlers);
@@ -96,6 +104,12 @@ app.post('/api/run-crawler/:id', async (req, res) => {
 			case 'alvin-texas':
 				result = await scrapeAlvinTexas();
 				break;
+			case 'port-arthur':
+				result = await scrapePortArthurt();
+				break;
+			case 'san-marcos':
+				result = await scrapeSanMarcos();
+				break;
 			default:
 				return res.status(404).json({ error: 'Crawler not found' });
 		}
@@ -122,13 +136,16 @@ app.post('/api/run-all-crawlers', async (req, res) => {
 		await scrapeTomballISD();
 		await scrapeLeagueCityTexas();
 		await scrapeAlvinTexas();
+		await scrapePortArthurt();
+		await scrapeSanMarcos();
 
 		res.json({ success: true, message: 'All crawlers completed successfully' });
 	} catch (error) {
 		console.error('Error running all crawlers:', error);
-		res
-			.status(500)
-			.json({ error: 'Failed to run all crawlers', details: error.message });
+		res.status(500).json({
+			error: 'Failed to run all crawlers',
+			details: error.message,
+		});
 	}
 });
 

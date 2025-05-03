@@ -28,13 +28,17 @@ app.use(express.static(path.join(__dirname, 'dashboard/dist')));
 app.get('/api/crawlers', (req, res) => {
 	const crawlers = [
 		{ id: 'texas-city', name: 'Texas City', filename: 'texascity_bids.csv' },
-		{ id: 'san-antonio', name: 'San Antonio', filename: 'sanantonio_bids.csv' },
+		{
+			id: 'san-antonio',
+			name: 'San Antonio',
+			filename: 'civcast_detailed_bids.csv',
+		},
 		{ id: 'tomball-isd', name: 'Tomball ISD', filename: 'tomballisd_bids.csv' },
 		{ id: 'league-city', name: 'League City', filename: 'leaguecity_bids.csv' },
 		{
 			id: 'alvin-texas',
 			name: 'Alvin Texas',
-			filename: 'civcast_detailed_bids.csv',
+			filename: 'alvintexas_bids.csv',
 		},
 		{
 			id: 'port-arthur',

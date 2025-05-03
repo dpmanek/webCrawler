@@ -3,3 +3,4 @@ export * from "./TexasCity";
 export { scrapeAlvinTexas } from "./AlvinTexas.js";
 export { scrapeLeagueCityTexas } from "./LeagueCity.js";
 export { scrapePortArthurt } from "./PortArthur.js";
+export { scrapeSanMarcos } from "./SanMarcos.js";

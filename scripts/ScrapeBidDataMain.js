@@ -2,7 +2,6 @@ import { scrapeSanAntonio } from "./SpecificWebsiteScripts/SanAntonio.js";
 import { scrapeTexasCity } from "./SpecificWebsiteScripts/TexasCity.js";
 import { scrapeAlvinTexas } from "./SpecificWebsiteScripts/AlvinTexas.js";
 import { scrapeLeagueCityTexas } from "./SpecificWebsiteScripts/LeagueCity.js";
-import { scrapeBrazosValley } from "./SpecificWebsiteScripts/BrazosValley.js";
 import { scrapePortArthurt } from "./SpecificWebsiteScripts/PortArthur.js";
 
 export async function scrapeData2() {

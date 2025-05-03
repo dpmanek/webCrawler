@@ -1,29 +1,37 @@
 {
-  "name": "webcrawler",
-  "version": "1.0.0",
-  "description": "",
-  "main": "app.js",
-  "type": "module",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/dpmanek/webCrawler.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/dpmanek/webCrawler/issues"
-  },
-  "homepage": "https://github.com/dpmanek/webCrawler#readme",
-  "dependencies": {
-    "axios": "^1.7.9",
-    "dotenv": "^16.4.7",
-    "fs": "^0.0.1-security",
-    "json2csv": "^6.0.0-alpha.2",
-    "path": "^0.12.7",
-    "puppeteer": "^24.2.0"
-  }
+	"name": "webcrawler",
+	"version": "1.0.0",
+	"description": "",
+	"main": "app.js",
+	"type": "module",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "node app.js",
+		"server": "node server.js",
+		"dashboard": "cd dashboard && npm run dev",
+		"dev": "concurrently \"npm run server\" \"npm run dashboard\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/dpmanek/webCrawler.git"
+	},
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/dpmanek/webCrawler/issues"
+	},
+	"homepage": "https://github.com/dpmanek/webCrawler#readme",
+	"dependencies": {
+		"axios": "^1.7.9",
+		"cors": "^2.8.5",
+		"dotenv": "^16.4.7",
+		"express": "^5.1.0",
+		"fs": "^0.0.1-security",
+		"json2csv": "^6.0.0-alpha.2",
+		"path": "^0.12.7",
+		"puppeteer": "^24.2.0"
+	},
+	"devDependencies": {
+		"concurrently": "^9.1.2"
+	}
 }

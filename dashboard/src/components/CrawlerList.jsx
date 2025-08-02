@@ -17,6 +17,7 @@ import {
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import WebIcon from '@mui/icons-material/Web';
 import DescriptionIcon from '@mui/icons-material/Description';
+import LaunchIcon from '@mui/icons-material/Launch';
 
 const CrawlerList = ({ crawlers, onRunCrawler, loading, runningCrawler }) => {
 	const theme = useTheme();
@@ -82,7 +83,15 @@ const CrawlerList = ({ crawlers, onRunCrawler, loading, runningCrawler }) => {
 							/>
 						</CardContent>
 
-						<Box sx={{ p: 2, pt: 0 }}>
+						<Box
+							sx={{
+								p: 2,
+								pt: 0,
+								display: 'flex',
+								gap: 1,
+								flexDirection: 'column',
+							}}
+						>
 							<Button
 								variant="contained"
 								color="primary"
@@ -105,6 +114,24 @@ const CrawlerList = ({ crawlers, onRunCrawler, loading, runningCrawler }) => {
 									? 'Running...'
 									: 'Run Crawler'}
 							</Button>
+
+							{crawler.url && (
+								<Button
+									variant="outlined"
+									color="primary"
+									fullWidth
+									size="small"
+									startIcon={<LaunchIcon />}
+									onClick={() => window.open(crawler.url, '_blank')}
+									sx={{
+										borderRadius: 2,
+										py: 0.5,
+										textTransform: 'none',
+									}}
+								>
+									Visit Bid Page
+								</Button>
+							)}
 						</Box>
 					</Card>
 				</Grid>

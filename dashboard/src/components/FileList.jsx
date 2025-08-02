@@ -71,27 +71,56 @@ const FileList = ({ files }) => {
 
 		try {
 			// Fetch the CSV file
-			const response = await fetch(`http://localhost:5000${file.path}`);
+			const response = await fetch(`http://localhost:5001${file.path}`);
 			const text = await response.text();
 
-			// Parse CSV
-			const rows = text.split('\n');
-			const headers = rows[0]
-				.split(',')
-				.map((header) => header.trim().replace(/"/g, ''));
+			// Parse CSV properly handling quoted fields
+			const parseCSVLine = (line) => {
+				const result = [];
+				let current = '';
+				let inQuotes = false;
 
-			const data = rows
-				.slice(1)
-				.filter((row) => row.trim())
-				.map((row) => {
-					const values = row
-						.split(',')
-						.map((value) => value.trim().replace(/"/g, ''));
-					return headers.reduce((obj, header, index) => {
-						obj[header] = values[index] || '';
-						return obj;
-					}, {});
-				});
+				for (let i = 0; i < line.length; i++) {
+					const char = line[i];
+					const nextChar = line[i + 1];
+
+					if (char === '"') {
+						if (inQuotes && nextChar === '"') {
+							// Escaped quote
+							current += '"';
+							i++; // Skip next quote
+						} else {
+							// Toggle quote state
+							inQuotes = !inQuotes;
+						}
+					} else if (char === ',' && !inQuotes) {
+						// Field separator
+						result.push(current.trim());
+						current = '';
+					} else {
+						current += char;
+					}
+				}
+
+				// Add the last field
+				result.push(current.trim());
+				return result;
+			};
+
+			const rows = text.split('\n').filter((row) => row.trim());
+			const headers = parseCSVLine(rows[0]).map((header) =>
+				header.replace(/^"|"$/g, '')
+			);
+
+			const data = rows.slice(1).map((row) => {
+				const values = parseCSVLine(row).map((value) =>
+					value.replace(/^"|"$/g, '')
+				);
+				return headers.reduce((obj, header, index) => {
+					obj[header] = values[index] || '';
+					return obj;
+				}, {});
+			});
 
 			setPreviewData({ headers, data });
 		} catch (error) {
@@ -202,7 +231,7 @@ const FileList = ({ files }) => {
 									variant="contained"
 									color="primary"
 									endIcon={<DownloadIcon />}
-									href={`http://localhost:5000${file.path}`}
+									href={`http://localhost:5001${file.path}`}
 									download
 									sx={{
 										borderRadius: 2,
@@ -266,7 +295,22 @@ const FileList = ({ files }) => {
 									{previewData.data.slice(0, 100).map((row, rowIndex) => (
 										<TableRow key={rowIndex} hover>
 											{previewData.headers.map((header, cellIndex) => (
-												<TableCell key={cellIndex}>{row[header]}</TableCell>
+												<TableCell
+													key={cellIndex}
+													sx={{
+														maxWidth: '300px',
+														overflow: 'hidden',
+														textOverflow: 'ellipsis',
+														whiteSpace: 'nowrap',
+														'&:hover': {
+															whiteSpace: 'normal',
+															wordBreak: 'break-word',
+														},
+													}}
+													title={row[header]} // Show full text on hover
+												>
+													{row[header]}
+												</TableCell>
 											))}
 										</TableRow>
 									))}
@@ -293,7 +337,7 @@ const FileList = ({ files }) => {
 						color="primary"
 						endIcon={<DownloadIcon />}
 						href={
-							previewFile ? `http://localhost:5000${previewFile.path}` : '#'
+							previewFile ? `http://localhost:5001${previewFile.path}` : '#'
 						}
 						download
 						sx={{ borderRadius: 2 }}

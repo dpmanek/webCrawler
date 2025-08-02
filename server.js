@@ -27,6 +27,8 @@ import { scrapeAnderson } from './scripts/SpecificWebsiteScripts/Anderson.js';
 import { scrapeCleveland } from './scripts/SpecificWebsiteScripts/Cleveland.js';
 import { scrapeWallerCounty } from './scripts/SpecificWebsiteScripts/WallerCounty.js';
 import { scrapeBeltonTexas } from './scripts/SpecificWebsiteScripts/BeltonTexas.js';
+import { scrapePasadenaTexas } from './scripts/SpecificWebsiteScripts/PasadenaTexas.js';
+import { scrapeWhartonCounty } from './scripts/SpecificWebsiteScripts/WhartonCounty.js';
 import { analyzeBidData } from './controllers/aiBidController.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -145,6 +147,18 @@ app.get('/api/crawlers', (req, res) => {
 			filename: 'belton_texas_bids.csv',
 			url: 'https://www.beltontexas.gov/government/city_clerk/construction.php',
 		},
+		{
+			id: 'pasadena-texas',
+			name: 'Pasadena Texas',
+			filename: 'pasadena_texas_bids.csv',
+			url: 'https://www.pasadenatx.gov/611/Bid-Opportunities',
+		},
+		{
+			id: 'wharton-county',
+			name: 'Wharton County',
+			filename: 'wharton_county_bids.csv',
+			url: 'https://www.co.wharton.tx.us/page/wharton.Bids',
+		},
 	];
 
 	res.json(crawlers);
@@ -243,6 +257,12 @@ app.post('/api/run-crawler/:id', async (req, res) => {
 			case 'belton-texas':
 				result = await scrapeBeltonTexas();
 				break;
+			case 'pasadena-texas':
+				result = await scrapePasadenaTexas();
+				break;
+			case 'wharton-county':
+				result = await scrapeWhartonCounty();
+				break;
 			default:
 				return res.status(404).json({ error: 'Crawler not found' });
 		}
@@ -281,6 +301,8 @@ app.post('/api/run-all-crawlers', async (req, res) => {
 		await scrapeCleveland();
 		await scrapeWallerCounty();
 		await scrapeBeltonTexas();
+		await scrapePasadenaTexas();
+		await scrapeWhartonCounty();
 
 		res.json({ success: true, message: 'All crawlers completed successfully' });
 	} catch (error) {

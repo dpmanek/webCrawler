@@ -13,6 +13,8 @@ import { scrapeAnderson } from './SpecificWebsiteScripts/Anderson.js';
 import { scrapeCleveland } from './SpecificWebsiteScripts/Cleveland.js';
 import { scrapeWallerCounty } from './SpecificWebsiteScripts/WallerCounty.js';
 import { scrapeBeltonTexas } from './SpecificWebsiteScripts/BeltonTexas.js';
+import { scrapePasadenaTexas } from './SpecificWebsiteScripts/PasadenaTexas.js';
+import { scrapeWhartonCounty } from './SpecificWebsiteScripts/WhartonCounty.js';
 
 export async function scrapeData2() {
 	console.log('🔍 Starting all scrapers...');
@@ -33,6 +35,8 @@ export async function scrapeData2() {
 		{ name: 'Cleveland', scraper: scrapeCleveland },
 		{ name: 'WallerCounty', scraper: scrapeWallerCounty },
 		{ name: 'BeltonTexas', scraper: scrapeBeltonTexas },
+		{ name: 'PasadenaTexas', scraper: scrapePasadenaTexas },
+		{ name: 'WhartonCounty', scraper: scrapeWhartonCounty },
 	];
 
 	for (const { name, scraper } of allScrapers) {

@@ -13,3 +13,5 @@ export { scrapeAnderson } from './Anderson.js';
 export { scrapeCleveland } from './Cleveland.js';
 export { scrapeWallerCounty } from './WallerCounty.js';
 export { scrapeBeltonTexas } from './BeltonTexas.js';
+export { scrapePasadenaTexas } from './PasadenaTexas.js';
+export { scrapeWhartonCounty } from './WhartonCounty.js';

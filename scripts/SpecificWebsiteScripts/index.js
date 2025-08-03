@@ -15,3 +15,5 @@ export { scrapeWallerCounty } from './WallerCounty.js';
 export { scrapeBeltonTexas } from './BeltonTexas.js';
 export { scrapePasadenaTexas } from './PasadenaTexas.js';
 export { scrapeWhartonCounty } from './WhartonCounty.js';
+export { scrapeCaldwellCounty } from './CaldwellCounty.js';
+export { scrapeMontgomeryCounty } from './MontgomeryCounty.js';

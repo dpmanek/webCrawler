@@ -76,6 +76,7 @@ const crawlerLocations = {
 	'belton-texas': { lat: 31.056, lng: -97.4642, name: 'Belton' },
 	'pasadena-texas': { lat: 29.6911, lng: -95.2091, name: 'Pasadena' },
 	'wharton-county': { lat: 29.3119, lng: -96.1027, name: 'Wharton County' },
+	'caldwell-county': { lat: 29.8688, lng: -97.6689, name: 'Caldwell County' },
 };
 
 const CrawlerMap = ({ crawlers, onRunCrawler, loading, runningCrawler }) => {

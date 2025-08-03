@@ -29,6 +29,8 @@ import { scrapeWallerCounty } from './scripts/SpecificWebsiteScripts/WallerCount
 import { scrapeBeltonTexas } from './scripts/SpecificWebsiteScripts/BeltonTexas.js';
 import { scrapePasadenaTexas } from './scripts/SpecificWebsiteScripts/PasadenaTexas.js';
 import { scrapeWhartonCounty } from './scripts/SpecificWebsiteScripts/WhartonCounty.js';
+import { scrapeCaldwellCounty } from './scripts/SpecificWebsiteScripts/CaldwellCounty.js';
+import { scrapeMontgomeryCounty } from './scripts/SpecificWebsiteScripts/MontgomeryCounty.js';
 import { analyzeBidData } from './controllers/aiBidController.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -159,6 +161,18 @@ app.get('/api/crawlers', (req, res) => {
 			filename: 'wharton_county_bids.csv',
 			url: 'https://www.co.wharton.tx.us/page/wharton.Bids',
 		},
+		{
+			id: 'caldwell-county',
+			name: 'Caldwell County',
+			filename: 'caldwell_county_bids.csv',
+			url: 'https://www.co.caldwell.tx.us/page/BidRequests',
+		},
+		{
+			id: 'montgomery-county',
+			name: 'Montgomery County',
+			filename: 'montgomery_county_bids.csv',
+			url: 'https://www.mctx.org/departments/departments_l_-_p/purchasing/bid_proposal_opening_date.php',
+		},
 	];
 
 	res.json(crawlers);
@@ -263,6 +277,12 @@ app.post('/api/run-crawler/:id', async (req, res) => {
 			case 'wharton-county':
 				result = await scrapeWhartonCounty();
 				break;
+			case 'caldwell-county':
+				result = await scrapeCaldwellCounty();
+				break;
+			case 'montgomery-county':
+				result = await scrapeMontgomeryCounty();
+				break;
 			default:
 				return res.status(404).json({ error: 'Crawler not found' });
 		}
@@ -303,6 +323,8 @@ app.post('/api/run-all-crawlers', async (req, res) => {
 		await scrapeBeltonTexas();
 		await scrapePasadenaTexas();
 		await scrapeWhartonCounty();
+		await scrapeCaldwellCounty();
+		await scrapeMontgomeryCounty();
 
 		res.json({ success: true, message: 'All crawlers completed successfully' });
 	} catch (error) {
